@@ -1,8 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 
 export const Dashboard = () => {
     return (
-        <h1>Dashboard</h1>
+        <div>
+            <h1>Dashboard</h1>
+            <Link href='/home'><button>Sair</button></Link>
+        </div>
     )
 }
 
