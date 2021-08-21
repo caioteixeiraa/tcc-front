@@ -6,7 +6,7 @@ export const Login = () => {
         <div>
             <h1>Login</h1>
             <Link href='/dashboard'><button>Entrar</button></Link>
-            <Link href='/home'><button>Voltar</button></Link>
+            <Link href='/'><button>Voltar</button></Link>
             <Link href='/register'><button>Cadastre-se</button></Link>
         </div>
     )
