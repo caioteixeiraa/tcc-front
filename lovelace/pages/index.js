@@ -1,13 +1,9 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { Button } from '../assets/design-system/Button'
+import WelcomeCard from '../components/WelcomeCard'
 
 export default function Home() {
   return (
     <div>
-      <h1>Hello lovelace!</h1>
-      <Link href='/login'><Button>Fazer login</Button></Link>
-      <Link href='/register'><button>Cadastre-se</button></Link>
+      <WelcomeCard />
     </div>
   )
 }

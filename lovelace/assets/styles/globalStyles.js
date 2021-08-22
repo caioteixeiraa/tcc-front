@@ -4,11 +4,20 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
   }
 `
 
 export const theme = {
   colors: {
-    primary: '#12a2da'
+    primary: {
+      normal: '#2B7DE9',
+      dark: '#0B5DC9'
+    },
+    grey: {
+      normal: '#EFEFEF',
+    },
+    black: '#1A1A1A',
+    white: '#FFFFFF'
   }
 }
