@@ -1,13 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
+import { Box, Heading } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/button'
 
 export const Register = () => {
     return (
-        <div>
-            <h1>Cadastro</h1>
-            <Link href='/dashboard'><button>Cadastrar</button></Link>
-            <Link href='/'><button>Voltar</button></Link>
-        </div>
+        <Box>
+            <Heading>Cadastro</Heading>
+            <ButtonGroup>
+                <Link href='/dashboard'>
+                    <Button colorScheme='telegram'>Cadastrar</Button>
+                </Link>
+                <Link href='/'>
+                    <Button colorScheme='telegram' variant='outline'>Voltar</Button>
+                </Link>
+            </ButtonGroup>
+        </Box>
     )
 }
 
