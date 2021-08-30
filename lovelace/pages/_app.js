@@ -1,6 +1,7 @@
 import { GlobalStyle, theme } from '../assets/styles/globalStyles'
 import { ThemeProvider } from 'styled-components'
 import HeadComponent from '../components/Head/index'
+import { ChakraProvider } from '@chakra-ui/react'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <HeadComponent />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
       </ThemeProvider>
     </>
   )

@@ -1,16 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
-import { PrimaryButton, SecondaryButton } from '../../assets/design-system/buttons'
-import { CardContainer, Title, Text } from './styles'
+import { Text, Heading, Stack } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/button'
 
 export const WelcomeCard = () => {
   return (
-    <CardContainer>
-      <Title>Hello lovelace!</Title>
-      <Text>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</Text>
-      <Link href='/login'><PrimaryButton>Fazer Login</PrimaryButton></Link>
-      <Link href='/register'><SecondaryButton>Cadastre-se</SecondaryButton></Link>
-    </CardContainer>
+    <Stack m='48px' spacing='24px'>
+      <Stack spacing='8px'>
+        <Heading>Hello lovelace!</Heading>
+        <Text>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</Text>
+      </Stack>
+      <ButtonGroup>
+      <Link href='/login'>
+        <Button colorScheme='telegram' variant='outline'>Fazer Login</Button>
+        </Link>
+      <Link href='/register'>
+        <Button colorScheme='telegram'>Cadastre-se</Button>
+      </Link>
+      </ButtonGroup>
+    </Stack>
   )
 }
 
