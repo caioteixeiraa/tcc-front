@@ -43,7 +43,7 @@ export const Login = () => {
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, body)
         .then((res) => {
             console.log("Logado!")
-            localStorage.setItem('token', res.data.accessToken)
+            window.localStorage.setItem('token', res.data.accessToken)
             router.push('dashboard')
         })
         .catch((err) => {
