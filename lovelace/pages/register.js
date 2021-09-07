@@ -63,7 +63,7 @@ export const Register = () => {
         axios.patch('http://localhost:5000/users/activate', body)
         .then((res) => {
             console.log("Usuário ativado!", body)
-            router.push('dashboard')
+            router.push('login')
         })
         .catch((err) => {
             console.log(err)
@@ -110,6 +110,7 @@ export const Register = () => {
                     </Stack>
                     <ButtonGroup>
                         <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
+                        <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
                     </ButtonGroup>
                 </Stack>
             </Box>
