@@ -76,7 +76,7 @@ export const Register = () => {
                 <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
             </Box>
             <Box w='50%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
-                <Stack spacing={4} w='300px'>
+                <Stack spacing={4} w='400px'>
                     <Heading>Cadastro</Heading>
                     <Stack>
                         <Input
