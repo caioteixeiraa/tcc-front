@@ -34,6 +34,9 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useInput('')
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [emailToken, setEmailToken] = useInput('')
+    const [conflictEmail, setConflictEmail] = useState(false)
+    const [isValidPassword, setIsValidPassword] = useState(false)
+    const [isSignupError, setIsSignupError] = useState(false)
 
     const router = useRouter()
 
@@ -49,7 +52,12 @@ export const Register = () => {
             onOpen()
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err.response.data.message)
+            if (err.response.data.message === 'Email is already in use') {
+                setConflictEmail(true)
+            } else {
+                setIsSignupError(true)   
+            }
         })
     }
 
@@ -68,6 +76,19 @@ export const Register = () => {
         })
     }
 
+    const checkPassword = () => {
+        if (password.length < 6) {
+            setIsValidPassword(false)
+        } else {
+            setIsValidPassword(true)
+        }
+    }
+
+    useEffect(() => {
+        setIsSignupError(false)
+        checkPassword()
+    }, [email, password])
+
     return (
         <Flex>
             <Box bg='#2B7DE9' w='50%' d='flex' alignItems='center' justifyContent='center'>
@@ -77,12 +98,18 @@ export const Register = () => {
                 <Stack spacing={4} w='400px'>
                     <Heading>Cadastro</Heading>
                     <Stack>
-                        <Input
-                            placeholder="E-mail"
-                            type='email'
-                            value={email}
-                            onChange={setEmail}
-                        />
+                        <Box>
+                            <Input
+                                placeholder="E-mail"
+                                type='email'
+                                value={email}
+                                onChange={(value) => {
+                                    setEmail(value)
+                                    setConflictEmail(false)
+                                }}
+                            />
+                            {conflictEmail && <Text as='i' color='crimson' fontSize='xs'>Esse e-mail já está sendo utilizado.</Text>}
+                        </Box>
                         <InputGroup>
                             <Input
                                 placeholder="Senha"
@@ -99,6 +126,7 @@ export const Register = () => {
                                 </Button>
                             </InputRightElement>
                         </InputGroup>
+                        {!isValidPassword && <Text as='i' color='crimson' fontSize='xs'>A senha deve ter no mínimo 6 caracteres.</Text>}
                         <Input
                             placeholder="Confirme sua senha"
                             type='password'
@@ -106,6 +134,7 @@ export const Register = () => {
                             onChange={setConfirmPassword}
                         />
                     </Stack>
+                    {isSignupError && <Text as='i' color='crimson' fontSize='xs'>Algo deu errado, tente novamente :(</Text>}
                     <ButtonGroup>
                         <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
                         <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
