@@ -40,11 +40,9 @@ export const Login = () => {
             password: password
         }
 
-        console.log(process)
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, body)
-        .then((res) => {
+        .then(() => {
             console.log("Logado!")
-            localStorage.setItem('token', res.data.accessToken)
             router.push('dashboard')
         })
         .catch((err) => {

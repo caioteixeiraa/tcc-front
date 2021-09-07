@@ -45,8 +45,7 @@ export const Register = () => {
         }
 
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/signup`, body)
-        .then((res) => {
-            console.log("Usuário cadastrado!", body, res)
+        .then(() => {
             onOpen()
         })
         .catch((err) => {
@@ -61,8 +60,7 @@ export const Register = () => {
         }
 
         axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/users/activate`, body)
-        .then((res) => {
-            console.log("Usuário ativado!", body)
+        .then(() => {
             router.push('login')
         })
         .catch((err) => {
