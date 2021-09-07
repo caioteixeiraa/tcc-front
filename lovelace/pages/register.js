@@ -44,7 +44,7 @@ export const Register = () => {
             confirmPassword: confirmPassword
         }
 
-        axios.post('http://localhost:5000/users/signup', body)
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/signup`, body)
         .then((res) => {
             console.log("Usuário cadastrado!", body, res)
             onOpen()
@@ -60,7 +60,7 @@ export const Register = () => {
             code: emailToken
         }
 
-        axios.patch('http://localhost:5000/users/activate', body)
+        axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/users/activate`, body)
         .then((res) => {
             console.log("Usuário ativado!", body)
             router.push('login')

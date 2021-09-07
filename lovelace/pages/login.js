@@ -40,7 +40,8 @@ export const Login = () => {
             password: password
         }
 
-        axios.post('http://localhost:5000/users/login', body)
+        console.log(process)
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, body)
         .then((res) => {
             console.log("Logado!")
             localStorage.setItem('token', res.data.accessToken)
