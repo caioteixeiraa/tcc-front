@@ -124,7 +124,7 @@ export const Login = () => {
                         </Link>
                         <Button 
                         colorScheme='telegram' 
-                        variant='text' 
+                        variant='link' 
                         onClick={onOpen}
                         >Esqueci minha senha</Button>
                     </ButtonGroup>
