@@ -7,6 +7,7 @@ import {
     Heading, 
     Input, 
     Stack, 
+    HStack,
     InputGroup, 
     InputRightElement,
     Modal,
@@ -37,6 +38,7 @@ export const Login = () => {
     const [newPassword, setNewPassword] = useInput('')
     const [confirmNewPassword, setConfirmNewPassword] = useInput('')
     const [emailToken, setEmailToken] = useInput('')
+    const [enableInputs, setEnableInputs] = useState(true)
 
     const login = () => {
         const body = {
@@ -46,7 +48,6 @@ export const Login = () => {
 
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, body)
         .then((res) => {
-            console.log("Logado!")
             window.localStorage.setItem('token', res.data.accessToken)
             router.push('dashboard')
         })
@@ -62,7 +63,6 @@ export const Login = () => {
 
         axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/users/forgot`, body)
         .then((res) => {
-            console.log("E-mail enviado")
         })
         .catch((err) => {
             console.log(err)
@@ -125,10 +125,7 @@ export const Login = () => {
                         <Button 
                         colorScheme='telegram' 
                         variant='text' 
-                        onClick={() => {
-                            onOpen(),
-                            forgotPassword()
-                        }}
+                        onClick={onOpen}
                         >Esqueci minha senha</Button>
                     </ButtonGroup>
                 </Stack>
@@ -142,14 +139,30 @@ export const Login = () => {
                     <ModalBody pb={6}>
                         <Stack spacing={4}>
                             <Stack spacing={2}>
-                                <Text>Foi enviado um código de 6 dígitos para o e-mail <Text as='b' d='span'>{email}</Text>, preencha-o abaixo e escolha sua nova senha.</Text>
+                                <Text>Preencha seu e-mail. Você receberá um e-mail com o código para mudar sua senha.</Text>
                                 <Text fontSize='xs' as='i'>*Não esqueça de checar o spam e abas de promoções ;)</Text>
                             </Stack>
+                            <HStack>
+                                <Input 
+                                    placeholder="E-mail" 
+                                    value={email}
+                                    onChange={setEmail} 
+                                />
+                                <Button 
+                                    colorScheme='telegram' 
+                                    onClick={() => {
+                                        forgotPassword(),
+                                        setEnableInputs(false)
+                                    }}>
+                                    Enviar
+                                </Button>
+                            </HStack>
                             <Input 
                                 placeholder="Código de confirmação" 
                                 maxLength={6}
                                 value={emailToken}
                                 onChange={setEmailToken} 
+                                isDisabled={enableInputs}
                             />
                             <InputGroup>
                             <Input
@@ -157,6 +170,7 @@ export const Login = () => {
                                 type={show ? 'text' : 'password'}
                                 value={newPassword}
                                 onChange={setNewPassword}
+                                isDisabled={enableInputs}
                             />
                             <InputRightElement>
                                 <Button p='10px' onClick={handleClick}>
@@ -172,6 +186,7 @@ export const Login = () => {
                                 type="password"
                                 value={confirmNewPassword}
                                 onChange={setConfirmNewPassword}
+                                isDisabled={enableInputs}
                             />
                         </Stack>
                     </ModalBody>
