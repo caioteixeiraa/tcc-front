@@ -19,7 +19,7 @@ import { states } from '../../helpers/states'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export const CreateProfile = () => {
-    // useProtectedPage()
+    useProtectedPage()
     const [skills, setSkills] = useState([])
     const [interests, setInterests] = useState([])
     const [userType, setUserType] = useState("")
