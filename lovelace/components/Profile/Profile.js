@@ -1,12 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { Text, Heading, Stack, Box, Link} from '@chakra-ui/react'
-import { translate } from '../../helpers/translate'
 import linkedin from '../../assets/images/linkedin.png'
 import github from '../../assets/images/github.png'
 
 export const Profile = ({ profile }) => {
-  console.log(profile)
   return (
     <Box textAlign="center">
         <Heading as="h3" size="md">{profile.name}, {profile.age}</Heading>
