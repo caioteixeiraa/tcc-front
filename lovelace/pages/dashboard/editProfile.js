@@ -163,8 +163,7 @@ export const EditProfile = () => {
                 <Heading as="h1" color="#FFFFFF" ml="32px">Mentorada</Heading>
                 <Link href='/'><Button colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button></Link>
             </Box>
-            <Text>Edite seu perfil</Text>
-            <Text>{userType}</Text>
+            <Heading as="h2" size="lg" textAlign="center" m="32px 16px">Edição de perfil</Heading>
             {userType !== "" &&
                 <form onSubmit={edit}>
                     <Stack spacing={4} mt="32px" mx={isMobile ? '16px' : 'auto'} maxW="380px" d="flex">  
@@ -311,7 +310,8 @@ export const EditProfile = () => {
                           })}
                         </Box>
                       </FormControl>
-                      <Button isFullWidth type="submit" colorScheme="telegram" mb="32px">Finalizar edição</Button>
+                      <Button isFullWidth type="submit" colorScheme="telegram" mt="32px" mb="40px">Finalizar edição</Button>
+                      <Box></Box>
                     </Stack>
                 </form>
             }

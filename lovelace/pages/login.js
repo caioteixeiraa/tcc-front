@@ -27,6 +27,7 @@ import hideIcon from '../assets/images/hide.png'
 import axios from 'axios'
 import { useInput } from '../hooks/useInput'
 import { useRouter } from 'next/router'
+import { isMobile } from 'react-device-detect'
 
 export const Login = () => {
     const [show, setShow] = useState(false)
@@ -90,16 +91,18 @@ export const Login = () => {
     }
 
     return (
-        <Flex>
-            <Box bg='#2B7DE9' w='40%' d='flex' alignItems='center' justifyContent='center'>
-                <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
-            </Box>
-            <Box w='60%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
-                <Stack spacing={4} w='400px'>
-                    <Stack spacing={2}>
-                        <Heading>Entre no Mentorada!</Heading>
-                        <Text>Faça login com seu e-mail e senha.</Text>
-                    </Stack>
+        <>
+            {!isMobile ?
+            <Box d="flex">
+                <Box bg='#2B7DE9' w='40%' d='flex' alignItems='center' justifyContent='center'>
+                    <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
+                </Box>
+                <Box w={isMobile ? '100vw' : '40%'} h='100vh' d='flex' alignItems='center' justifyContent='center'>
+                    <Stack spacing={4} w='400px'>
+                        <Stack spacing={2}>
+                            <Heading>Entre no Mentorada!</Heading>
+                            <Text>Faça login com seu e-mail e senha.</Text>
+                        </Stack>
                     <Stack>
                         <Input
                             placeholder="E-mail"
@@ -130,15 +133,67 @@ export const Login = () => {
                             <Button colorScheme='telegram' variant='outline'>Voltar</Button>
                         </Link>
                         <Button 
-                        colorScheme='telegram' 
-                        variant='link' 
-                        onClick={onOpen}
-                        >Esqueci minha senha</Button>
+                            colorScheme='telegram' 
+                            variant='link' 
+                            onClick={onOpen}
+                            >Esqueci minha senha</Button>
+                        </ButtonGroup>
+                    </Stack>
+                </Box>
+                </Box> :
+            <>
+                <Box d='flex' backgroundColor="#0088CC" h="60px"  justifyContent="center" alignItems="center">
+                    <Heading as="h1" color="#FFFFFF">Mentorada</Heading>
+                </Box>
+                    <Stack mt="32px" spacing={4} textAlign="center">
+                        <Stack spacing={2}>
+                            <Heading>Entre no Mentorada!</Heading>
+                            <Text>Faça login com seu e-mail e senha.</Text>
+                        </Stack>
+                    <Stack mx="16px">
+                        <Input
+                            placeholder="E-mail"
+                            type='email'
+                            value={email}
+                            onChange={setEmail}
+                            maxWidth="300px"
+                            m="0 auto"
+                        />
+                        <Box d="flex" justifyContent="center">
+                            <InputGroup maxWidth="300px">
+                                <Input
+                                    placeholder="Senha"
+                                    type={show ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={setPassword}
+                                />
+                                <InputRightElement>
+                                    <Button p='10px' onClick={handleClick}>
+                                        {show ?
+                                            <Image src={hideIcon} width={40} height={40} /> :
+                                            <Image src={showIcon} width={40} height={40} />
+                                        }
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                        </Box>
+                    </Stack>
+                    <ButtonGroup d="flex" justifyContent="center">
+                        <Button colorScheme='telegram' onClick={login}>Entrar</Button>
+                        <Link href='/'>
+                            <Button colorScheme='telegram' variant='outline'>Voltar</Button>
+                        </Link>
                     </ButtonGroup>
-                </Stack>
-            </Box>
+                        <Button 
+                            colorScheme='telegram' 
+                            variant='link' 
+                            onClick={onOpen}
+                            >Esqueci minha senha</Button>
+                    </Stack>
+            </>
+            }
 
-            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} mx="16px">
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Trocar senha</ModalHeader>
@@ -206,7 +261,7 @@ export const Login = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </Flex>
+        </>
     )
 }
 

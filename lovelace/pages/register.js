@@ -25,6 +25,7 @@ import hideIcon from '../assets/images/hide.png'
 import axios from 'axios'
 import { useInput } from '../hooks/useInput'
 import { useRouter } from 'next/router'
+import { isMobile } from 'react-device-detect'
 
 export const Register = () => {
     const [show, setShow] = useState(false)
@@ -92,58 +93,115 @@ export const Register = () => {
     }, [email, password])
 
     return (
-        <Flex>
-            <Box bg='#2B7DE9' w='40%' d='flex' alignItems='center' justifyContent='center'>
-                <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
-            </Box>
-            <Box w='60%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
-                <Stack spacing={4} w='400px'>
-                    <Heading>Cadastro</Heading>
-                    <Stack>
-                        <Box>
+        <>
+        {!isMobile ?
+            <Box d="flex">
+                <Box bg='#2B7DE9' w='40%' d='flex' alignItems='center' justifyContent='center'>
+                    <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
+                </Box>
+                <Box w='60%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
+                    <Stack spacing={4} w='400px'>
+                        <Heading>Cadastro</Heading>
+                        <Stack>
+                            <Box>
+                                <Input
+                                    placeholder="E-mail"
+                                    type='email'
+                                    value={email}
+                                    onChange={(value) => {
+                                        setEmail(value)
+                                        setConflictEmail(false)
+                                    }}
+                                />
+                                {conflictEmail && <Text as='i' color='crimson' fontSize='xs'>Esse e-mail já está sendo utilizado.</Text>}
+                            </Box>
+                            <InputGroup>
+                                <Input
+                                    placeholder="Senha"
+                                    type={show ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={setPassword}
+                                />
+                                <InputRightElement>
+                                    <Button p='10px' onClick={handleClick}>
+                                        {show ?
+                                            <Image src={hideIcon} width={40} height={40} /> :
+                                            <Image src={showIcon} width={40} height={40} />
+                                        }
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                            {!isValidPassword && <Text as='i' color='crimson' fontSize='xs'>A senha deve ter no mínimo 6 caracteres.</Text>}
                             <Input
-                                placeholder="E-mail"
-                                type='email'
-                                value={email}
-                                onChange={(value) => {
-                                    setEmail(value)
-                                    setConflictEmail(false)
-                                }}
+                                placeholder="Confirme sua senha"
+                                type='password'
+                                value={confirmPassword}
+                                onChange={setConfirmPassword}
                             />
-                            {conflictEmail && <Text as='i' color='crimson' fontSize='xs'>Esse e-mail já está sendo utilizado.</Text>}
-                        </Box>
-                        <InputGroup>
-                            <Input
-                                placeholder="Senha"
-                                type={show ? 'text' : 'password'}
-                                value={password}
-                                onChange={setPassword}
-                            />
-                            <InputRightElement>
-                                <Button p='10px' onClick={handleClick}>
-                                    {show ?
-                                        <Image src={hideIcon} width={40} height={40} /> :
-                                        <Image src={showIcon} width={40} height={40} />
-                                    }
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                        {!isValidPassword && <Text as='i' color='crimson' fontSize='xs'>A senha deve ter no mínimo 6 caracteres.</Text>}
-                        <Input
-                            placeholder="Confirme sua senha"
-                            type='password'
-                            value={confirmPassword}
-                            onChange={setConfirmPassword}
-                        />
+                        </Stack>
+                        {isSignupError && <Text as='i' color='crimson' fontSize='xs'>Algo deu errado, tente novamente :(</Text>}
+                        <ButtonGroup>
+                            <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
+                            <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
+                        </ButtonGroup>
                     </Stack>
-                    {isSignupError && <Text as='i' color='crimson' fontSize='xs'>Algo deu errado, tente novamente :(</Text>}
-                    <ButtonGroup>
-                        <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
-                        <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
-                    </ButtonGroup>
-                </Stack>
-            </Box>
-
+                </Box> 
+            </Box> :
+            <>
+                <Box d='flex' backgroundColor="#0088CC" h="60px"  justifyContent="center" alignItems="center">
+                    <Heading as="h1" color="#FFFFFF">Mentorada</Heading>
+                </Box>
+                <Box d='flex' alignItems='center' justifyContent='center' textAlign="center" mt="32px">
+                    <Stack spacing={4} maxWidth='300px'>
+                        <Heading>Cadastro</Heading>
+                        <Stack>
+                            <Box>
+                                <Input
+                                    placeholder="E-mail"
+                                    type='email'
+                                    value={email}
+                                    onChange={(value) => {
+                                        setEmail(value)
+                                        setConflictEmail(false)
+                                    }}
+                                />
+                                {conflictEmail && <Text as='i' color='crimson' fontSize='xs'>Esse e-mail já está sendo utilizado.</Text>}
+                            </Box>
+                            <InputGroup>
+                                <Input
+                                    placeholder="Senha"
+                                    type={show ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={setPassword}
+                                />
+                                <InputRightElement>
+                                    <Button p='10px' onClick={handleClick}>
+                                        {show ?
+                                            <Image src={hideIcon} width={40} height={40} /> :
+                                            <Image src={showIcon} width={40} height={40} />
+                                        }
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                            {!isValidPassword && <Text as='i' color='crimson' fontSize='xs'>A senha deve ter no mínimo 6 caracteres.</Text>}
+                            <Input
+                                placeholder="Confirme sua senha"
+                                type='password'
+                                value={confirmPassword}
+                                onChange={setConfirmPassword}
+                            />
+                        </Stack>
+                        {isSignupError && <Text as='i' color='crimson' fontSize='xs'>Algo deu errado, tente novamente :(</Text>}
+                        <Box d="flex" justifyContent="center">
+                            <ButtonGroup>
+                                <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
+                                <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
+                            </ButtonGroup>
+                        </Box>
+                    </Stack>
+                </Box>
+            </>
+        }
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -167,7 +225,7 @@ export const Register = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </Flex>
+        </>
     )
 }
 
