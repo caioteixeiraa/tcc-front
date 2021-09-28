@@ -7,8 +7,8 @@ export const WelcomeCard = () => {
   return (
     <Stack m='48px' spacing='24px'>
       <Stack spacing='8px'>
-        <Heading>Hello lovelace!</Heading>
-        <Text>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</Text>
+        <Heading as="h1" size="3xl">Bem-vinda(o) ao Mentorada!</Heading>
+        <Text><b>Conecte-se com pessoas do mercado de tecnologia!</b> Você pode criar conexões que vão te ajudar a conseguir seu primeiro emprego ou ajudar alguém com esse objetivo. <b>Vamos nessa?</b></Text>
       </Stack>
       <ButtonGroup>
       <Link href='/login'>

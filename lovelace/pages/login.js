@@ -49,7 +49,11 @@ export const Login = () => {
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, body)
         .then((res) => {
             window.localStorage.setItem('token', res.data.accessToken)
-            router.push('dashboard')
+            window.localStorage.setItem('userId', res.data.id)
+            router.push({
+                pathname: '/dashboard',
+                query:{ userId: res.data.id }
+            })
         })
         .catch((err) => {
             console.log(err)
@@ -87,12 +91,15 @@ export const Login = () => {
 
     return (
         <Flex>
-            <Box bg='#2B7DE9' w='50%' d='flex' alignItems='center' justifyContent='center'>
+            <Box bg='#2B7DE9' w='40%' d='flex' alignItems='center' justifyContent='center'>
                 <Image src={connectionIcon} width={300} height={300} alt='Imagem de conexões' />
             </Box>
-            <Box w='50%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
+            <Box w='60%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
                 <Stack spacing={4} w='400px'>
-                    <Heading>Entre em Lovelace</Heading>
+                    <Stack spacing={2}>
+                        <Heading>Entre no Mentorada!</Heading>
+                        <Text>Faça login com seu e-mail e senha.</Text>
+                    </Stack>
                     <Stack>
                         <Input
                             placeholder="E-mail"

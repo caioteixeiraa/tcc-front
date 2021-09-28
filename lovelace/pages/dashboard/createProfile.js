@@ -17,6 +17,9 @@ import { useProtectedPage } from '../../hooks/useProtectedPage'
 import useForm from '../../hooks/useForm'
 import { states } from '../../helpers/states'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
+import axios from 'axios'
+import router from 'next/router'
+import { isMobile } from 'react-device-detect';
 
 export const CreateProfile = () => {
     useProtectedPage()
@@ -83,7 +86,7 @@ export const CreateProfile = () => {
         {   
             label: "LinkedIn",
             name: "linkedin",
-            placeholder: "Linkedin",
+            placeholder: "Link para o seu Linkedin",
             type: "text",
             required: true,
             inputType: "text",
@@ -92,7 +95,7 @@ export const CreateProfile = () => {
         {   
             label: "Github",
             name: "github",
-            placeholder: "Github",
+            placeholder: "Link para o seu Github",
             type: "text",
             required: true,
             inputType: "text",
@@ -101,7 +104,7 @@ export const CreateProfile = () => {
         {   
             label: "Competências",
             name: "skills",
-            placeholder: "Competências",
+            placeholder: "Ex: React, Node, Python",
             type: "text",
             required: false,
             inputType: "multiple",
@@ -112,12 +115,12 @@ export const CreateProfile = () => {
         {   
             label: "Interesses",
             name: "interests",
-            placeholder: "Interesses",
+            placeholder: "Ex: React, Node, Python",
             type: "text",
             required: false,
             inputType: "multiple",
             values: interests,
-            helperText: "Não se preocupe com a ordem ;)",
+            helperText: "Aqui você coloca o que deseja desenvolver na sua carreira",
             users: ["mentee", "mentor"]
         },
     ]
@@ -125,9 +128,12 @@ export const CreateProfile = () => {
     const initialForm = {}
     useEffect(() => {
         defaultForm.forEach((input) => {
-            initialForm[input.name] = ""
+            if (input.users.includes(userType)) {
+                initialForm[input.name] = ""
+            }
         })
-    }, [])
+        console.log(initialForm)
+    }, [userType])
 
     
     const [form, onChange, clearInput, clearAll] = useForm(initialForm)
@@ -138,12 +144,31 @@ export const CreateProfile = () => {
 
     const submit = (event) => {
         event.preventDefault()
+        window.localStorage.setItem("userType", userType)
         const body = {
             ...form,
             skills: skills,
-            interests: interests
+            interests: interests,
+            userId: window.localStorage.getItem("userId")
         }
         console.log(body)
+
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/${userType}s/create`, body, {
+            headers: {
+                Authorization: window.localStorage.getItem("token")
+            }
+        })
+        .then((res) => {
+            console.log(res)
+            clearAll()
+            router.push({
+                pathname: `/dashboard`,
+                query: { userId: localStorage.getItem("userId") }
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const addInput = (inputName, value) => {
@@ -176,56 +201,28 @@ export const CreateProfile = () => {
 
     return (
         <Box>
-            <Box d='flex'>
-                <Heading>Criar perfil</Heading>
-                <Link href='/dashboard'><Button colorScheme='telegram' onClick={logout}>Voltar</Button></Link>
+            <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
+                <Heading as="h1" color="#FFFFFF" ml="32px" >Mentorada</Heading>
+                <Button colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button>
             </Box>
 
-            <Text>Quer ser mentorado(a) ou mentor(a)?</Text>
+            <Heading as="h2" size="lg" mt="32px" mx={isMobile ? '32px' : 'auto'} textAlign="center">Quer ser mentorado(a) ou quer mentorar alguém? 🤔</Heading>
             
-            <ButtonGroup>
-                <Button onClick={() => selectUserType("mentee")} isActive={userType !== "mentor" && userType !== ""} colorScheme="telegram">Mentorado(a)</Button>
-                <Button onClick={() => selectUserType("mentor")} isActive={userType !== "mentee" && userType !== ""} colorScheme="telegram">Mentor(a)</Button>
+            <ButtonGroup mt="32px" mx="8px" d="flex" justifyContent="center" flexWrap="wrap">
+                <Button variant="outline" mb="8px" onClick={() => selectUserType("mentee")} isActive={userType !== "mentor" && userType !== ""} colorScheme="telegram">Quero ser mentorada(o)</Button>
+                <Button variant="outline" onClick={() => selectUserType("mentor")} isActive={userType !== "mentee" && userType !== ""} colorScheme="telegram">Quero mentorar</Button>
             </ButtonGroup>
 
-            <form onSubmit={submit}>
-                <Stack spacing={4}>
-                    {defaultForm.map((input) => {
-                        switch(input.inputType) {
-                            case "text":
-                                if (input.users.includes(userType)) {
-                                    return (
-                                        <FormControl key={input.name} isRequired={input.required}>
-                                            <FormLabel>{input.label}</FormLabel>
-                                            <Input 
-                                                name={input.name}
-                                                value={form[input.name]} 
-                                                onChange={onChange} 
-                                                placeholder={input.placeholder}
-                                                type={input.type}
-                                            />
-                                            {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
-                                        </FormControl>
-                                    )
-                                }
-                            case "select":
-                                if (input.users.includes(userType)) {
-                                    return (
-                                        <FormControl key={input.name} isRequired={input.required}>
-                                            <FormLabel>{input.label}</FormLabel>
-                                            <Select name={input.name} onChange={onChange} placeholder={input.placeholder}>
-                                                {states.map((state) => <option value={state} key={state}>{state}</option>)}
-                                            </Select>
-                                            {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
-                                        </FormControl>
-                                    )
-                                }
-                            case "multiple":
-                                if (input.users.includes(userType)) {
-                                    return (
-                                        <FormControl key={input.name} isRequired={input.required}>
-                                            <FormLabel>{input.label}</FormLabel>
-                                            <Box d="flex" alignItems="center">
+            {userType !== "" &&
+                <form onSubmit={submit}>
+                    <Stack spacing={4} mt="32px" mx={isMobile ? '16px' : 'auto'} maxW="380px" d="flex">
+                        {defaultForm.map((input) => {
+                            switch(input.inputType) {
+                                case "text":
+                                    if (input.users.includes(userType)) {
+                                        return (
+                                            <FormControl key={input.name} isRequired={input.required}>
+                                                <FormLabel>{input.label}</FormLabel>
                                                 <Input 
                                                     name={input.name}
                                                     value={form[input.name]} 
@@ -233,35 +230,65 @@ export const CreateProfile = () => {
                                                     placeholder={input.placeholder}
                                                     type={input.type}
                                                 />
-                                                <Button ml="8px" colorScheme="telegram" onClick={() => addInput(input.name, form[input.name])}>
-                                                    <AddIcon w={4} h={4} />
-                                                </Button>
-                                            </Box>
-                                            {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
-                                            <Box mt="4px">
-                                                {input.values.map((value) => {
-                                                    return (
-                                                        <Box key={value} d="flex" alignItems="center" >
-                                                            <Input
-                                                                mt="4px"
-                                                                value={value}
-                                                                isReadOnly
-                                                            />
-                                                            <Button ml="8px" variant="outlined" colorScheme="telegram" onClick={() => removeInput(input.name, value)}>
-                                                                <DeleteIcon w={4} h={4} />
-                                                            </Button>
-                                                        </Box>
-                                                    )
-                                                })}
-                                            </Box>
-                                        </FormControl>
-                                    )
-                                }
-                        }
-                    })}
-                </Stack>
-                <Button type="submit" colorScheme="telegram">Criar</Button>
-            </form>
+                                                {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
+                                            </FormControl>
+                                        )
+                                    }
+                                case "select":
+                                    if (input.users.includes(userType)) {
+                                        return (
+                                            <FormControl key={input.name} isRequired={input.required}>
+                                                <FormLabel>{input.label}</FormLabel>
+                                                <Select name={input.name} onChange={onChange} placeholder={input.placeholder}>
+                                                    {states.map((state) => <option value={state} key={state}>{state}</option>)}
+                                                </Select>
+                                                {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
+                                            </FormControl>
+                                        )
+                                    }
+                                case "multiple":
+                                    if (input.users.includes(userType)) {
+                                        return (
+                                            <FormControl key={input.name} isRequired={input.required}>
+                                                <FormLabel>{input.label}</FormLabel>
+                                                <Box d="flex" alignItems="center">
+                                                    <Input 
+                                                        name={input.name}
+                                                        value={form[input.name]} 
+                                                        onChange={onChange} 
+                                                        placeholder={input.placeholder}
+                                                        type={input.type}
+                                                    />
+                                                    <Button ml="8px" colorScheme="telegram" onClick={() => addInput(input.name, form[input.name])}>
+                                                        <AddIcon w={4} h={4} />
+                                                    </Button>
+                                                </Box>
+                                                {input.helperText && <FormHelperText>{input.helperText}</FormHelperText>}
+                                                <Box mt="4px">
+                                                    {input.values.map((value) => {
+                                                        return (
+                                                            <Box key={value} d="flex" alignItems="center" >
+                                                                <Input
+                                                                    mt="4px"
+                                                                    value={value}
+                                                                    isReadOnly
+                                                                />
+                                                                <Button ml="8px" variant="outlined" colorScheme="telegram" onClick={() => removeInput(input.name, value)}>
+                                                                    <DeleteIcon w={4} h={4} />
+                                                                </Button>
+                                                            </Box>
+                                                        )
+                                                    })}
+                                                </Box>
+                                            </FormControl>
+                                        )
+                                    }
+                            }
+                        })}
+                    <Button isFullWidth type="submit" colorScheme="telegram" mb="32px">Criar perfil</Button>
+                    </Stack>
+                </form>
+            }
         </Box>
     )
 }
