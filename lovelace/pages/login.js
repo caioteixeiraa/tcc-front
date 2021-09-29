@@ -27,7 +27,7 @@ import hideIcon from '../assets/images/hide.png'
 import axios from 'axios'
 import { useInput } from '../hooks/useInput'
 import { useRouter } from 'next/router'
-import { isMobile } from 'react-device-detect'
+import { useWindowProperties } from '../helpers/useWindowProperties'
 
 export const Login = () => {
     const [show, setShow] = useState(false)
@@ -40,6 +40,8 @@ export const Login = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useInput('')
     const [emailToken, setEmailToken] = useInput('')
     const [enableInputs, setEnableInputs] = useState(true)
+
+    const { isMobile } = useWindowProperties()
 
     const login = () => {
         const body = {
@@ -142,48 +144,48 @@ export const Login = () => {
                 </Box>
                 </Box> :
             <>
-                <Box d='flex' backgroundColor="#0088CC" h="60px"  justifyContent="center" alignItems="center">
-                    <Heading as="h1" color="#FFFFFF">Mentorada</Heading>
+                <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="center" alignItems="center">
+                    <Heading as="h1" color="#FFFFFF" >Mentorada</Heading>
                 </Box>
                     <Stack mt="32px" spacing={4} textAlign="center">
                         <Stack spacing={2}>
                             <Heading>Entre no Mentorada!</Heading>
                             <Text>Faça login com seu e-mail e senha.</Text>
                         </Stack>
-                    <Stack mx="16px">
-                        <Input
-                            placeholder="E-mail"
-                            type='email'
-                            value={email}
-                            onChange={setEmail}
-                            maxWidth="300px"
-                            m="0 auto"
-                        />
-                        <Box d="flex" justifyContent="center">
-                            <InputGroup maxWidth="300px">
-                                <Input
-                                    placeholder="Senha"
-                                    type={show ? 'text' : 'password'}
-                                    value={password}
-                                    onChange={setPassword}
-                                />
-                                <InputRightElement>
-                                    <Button p='10px' onClick={handleClick}>
-                                        {show ?
-                                            <Image src={hideIcon} width={40} height={40} /> :
-                                            <Image src={showIcon} width={40} height={40} />
-                                        }
-                                    </Button>
-                                </InputRightElement>
-                            </InputGroup>
-                        </Box>
+                        <Stack mx="16px">
+                            <Input
+                                placeholder="E-mail"
+                                type='email'
+                                value={email}
+                                onChange={setEmail}
+                                maxWidth="300px"
+                                m="0 auto"
+                            />
+                            <Box d="flex" justifyContent="center">
+                                <InputGroup maxWidth="300px">
+                                    <Input
+                                        placeholder="Senha"
+                                        type={show ? 'text' : 'password'}
+                                        value={password}
+                                        onChange={setPassword}
+                                    />
+                                    <InputRightElement>
+                                        <Button p='10px' onClick={handleClick}>
+                                            {show ?
+                                                <Image src={hideIcon} width={40} height={40} /> :
+                                                <Image src={showIcon} width={40} height={40} />
+                                            }
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
+                            </Box>
                     </Stack>
-                    <ButtonGroup d="flex" justifyContent="center">
-                        <Button colorScheme='telegram' onClick={login}>Entrar</Button>
+                    <Box d="flex" flexDir="column" alignItems="center" >
+                        <Button colorScheme='telegram' onClick={login} maxWidth="300px" isFullWidth mb="8px">Entrar</Button>
                         <Link href='/'>
-                            <Button colorScheme='telegram' variant='outline'>Voltar</Button>
+                            <Button colorScheme='telegram' variant='outline' maxWidth="300px" isFullWidth>Voltar</Button>
                         </Link>
-                    </ButtonGroup>
+                    </Box>
                         <Button 
                             colorScheme='telegram' 
                             variant='link' 

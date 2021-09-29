@@ -18,7 +18,7 @@ import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useRouter } from 'next/router'
 import { states } from '../../helpers/states'
 import axios from 'axios'
-import { isMobile } from 'react-device-detect'
+import { useWindowProperties } from '../../helpers/useWindowProperties'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
 import link from 'next/link'
 
@@ -40,6 +40,7 @@ export const EditProfile = () => {
   const [skill, setSkill] = useState("")
   const [interest, setInterest] = useState("")
   const [interests, setInterests] = useState([])
+  const { isMobile } = useWindowProperties()
     
     const checkIfHasProfile = async () => {
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getMentorById?userId=${router.query.userId}`, {

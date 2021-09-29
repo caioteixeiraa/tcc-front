@@ -19,13 +19,14 @@ import { states } from '../../helpers/states'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import router from 'next/router'
-import { isMobile } from 'react-device-detect';
+import { useWindowProperties } from '../../helpers/useWindowProperties'
 
 export const CreateProfile = () => {
     useProtectedPage()
     const [skills, setSkills] = useState([])
     const [interests, setInterests] = useState([])
     const [userType, setUserType] = useState("")
+    const { isMobile } = useWindowProperties()
 
     const defaultForm = [
         {   

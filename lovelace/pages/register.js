@@ -26,6 +26,7 @@ import axios from 'axios'
 import { useInput } from '../hooks/useInput'
 import { useRouter } from 'next/router'
 import { isMobile } from 'react-device-detect'
+import { useWindowProperties } from '../helpers/useWindowProperties'
 
 export const Register = () => {
     const [show, setShow] = useState(false)
@@ -38,6 +39,8 @@ export const Register = () => {
     const [conflictEmail, setConflictEmail] = useState(false)
     const [isValidPassword, setIsValidPassword] = useState(false)
     const [isSignupError, setIsSignupError] = useState(false)
+
+    const { isMobile } = useWindowProperties()
 
     const router = useRouter()
 
@@ -148,18 +151,20 @@ export const Register = () => {
                 </Box> 
             </Box> :
             <>
-                <Box d='flex' backgroundColor="#0088CC" h="60px"  justifyContent="center" alignItems="center">
-                    <Heading as="h1" color="#FFFFFF">Mentorada</Heading>
-                </Box>
+                <Heading as="h1" color="#FFFFFF" backgroundColor="#0088CC" h="60px" d="flex" justifyContent="center"alignItems="center">Mentorada</Heading>
                 <Box d='flex' alignItems='center' justifyContent='center' textAlign="center" mt="32px">
-                    <Stack spacing={4} maxWidth='300px'>
-                        <Heading>Cadastro</Heading>
+                    <Stack spacing={4}>
+                        <Stack spacing={2} mx="16px">
+                            <Heading>Cadastro</Heading>
+                            <Text>Bastam um e-mail e senha e você receberá um código por e-mail para confirmar o cadastro.</Text>
+                        </Stack>
                         <Stack>
                             <Box>
                                 <Input
                                     placeholder="E-mail"
                                     type='email'
                                     value={email}
+                                    maxWidth="300px"
                                     onChange={(value) => {
                                         setEmail(value)
                                         setConflictEmail(false)
@@ -167,36 +172,40 @@ export const Register = () => {
                                 />
                                 {conflictEmail && <Text as='i' color='crimson' fontSize='xs'>Esse e-mail já está sendo utilizado.</Text>}
                             </Box>
-                            <InputGroup>
-                                <Input
-                                    placeholder="Senha"
-                                    type={show ? 'text' : 'password'}
-                                    value={password}
-                                    onChange={setPassword}
-                                />
-                                <InputRightElement>
-                                    <Button p='10px' onClick={handleClick}>
-                                        {show ?
-                                            <Image src={hideIcon} width={40} height={40} /> :
-                                            <Image src={showIcon} width={40} height={40} />
-                                        }
-                                    </Button>
-                                </InputRightElement>
-                            </InputGroup>
+                            <Box d="flex" justifyContent="center">
+                                <InputGroup maxWidth='300px'>
+                                    <Input
+                                        placeholder="Senha"
+                                        type={show ? 'text' : 'password'}
+                                        value={password}
+                                        onChange={setPassword}
+                                    />
+                                    <InputRightElement>
+                                        <Button p='10px' onClick={handleClick}>
+                                            {show ?
+                                                <Image src={hideIcon} width={40} height={40} /> :
+                                                <Image src={showIcon} width={40} height={40} />
+                                            }
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
+
+                            </Box>
                             {!isValidPassword && <Text as='i' color='crimson' fontSize='xs'>A senha deve ter no mínimo 6 caracteres.</Text>}
-                            <Input
-                                placeholder="Confirme sua senha"
-                                type='password'
-                                value={confirmPassword}
-                                onChange={setConfirmPassword}
-                            />
+                            <Box d="flex" justifyContent="center">
+                                <Input
+                                    placeholder="Confirme sua senha"
+                                    type='password'
+                                    value={confirmPassword}
+                                    onChange={setConfirmPassword}
+                                    maxWidth="300px"
+                                />
+                            </Box>
                         </Stack>
                         {isSignupError && <Text as='i' color='crimson' fontSize='xs'>Algo deu errado, tente novamente :(</Text>}
-                        <Box d="flex" justifyContent="center">
-                            <ButtonGroup>
-                                <Button colorScheme='telegram' onClick={register}>Cadastrar</Button>
-                                <Button colorScheme='telegram' variant='outline' onClick={() => router.back()}>Voltar</Button>
-                            </ButtonGroup>
+                        <Box d="flex" flexDir="column" alignItems="center" >
+                            <Button colorScheme='telegram' onClick={register} isFullWidth maxWidth="300px" mb="8px">Cadastrar</Button>
+                            <Button colorScheme='telegram' variant='outline' onClick={() => router.back()} isFullWidth maxWidth="300px">Voltar</Button>
                         </Box>
                     </Stack>
                 </Box>
