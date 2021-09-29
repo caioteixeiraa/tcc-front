@@ -162,7 +162,12 @@ export const EditProfile = () => {
         <Box>
             <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
                 <Heading as="h1" color="#FFFFFF" ml="32px">Mentorada</Heading>
-                <Link href='/'><Button colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button></Link>
+                <Link href='/'><Button colorScheme='telegram' onClick={() => 
+                  router.push({
+                    pathname: `/dashboard`,
+                    query: { userId: localStorage.getItem("userId") }
+                  })
+                } mr="8px">Voltar</Button></Link>
             </Box>
             <Heading as="h2" size="lg" textAlign="center" m="32px 16px">Edição de perfil</Heading>
             {userType !== "" &&
