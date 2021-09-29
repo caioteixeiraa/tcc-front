@@ -4,8 +4,8 @@ import Head from 'next/head'
 export const HeadComponent = () => {
   return (
     <Head>
-        <title>Lovelace</title>
-        <meta name="description" content="Connecting people and opportunities" />
+        <title>Mentorada</title>
+        <meta name="description" content="Conectando pessoas e oportunidades" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
