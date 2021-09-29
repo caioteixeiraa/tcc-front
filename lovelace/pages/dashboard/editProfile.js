@@ -165,7 +165,7 @@ export const EditProfile = () => {
                 <Link href='/'><Button colorScheme='telegram' onClick={() => 
                   router.push({
                     pathname: `/dashboard`,
-                    query: { userId: localStorage.getItem("userId") }
+                    query: { userId: window.localStorage.getItem("userId") }
                   })
                 } mr="8px">Voltar</Button></Link>
             </Box>
