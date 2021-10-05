@@ -67,7 +67,9 @@ export const Dashboard = () => {
                 <Box>
                     <Heading as="h2" size="lg" textAlign="center" m="24px 8px">Seu perfil está completo! 🎉</Heading>
                     <Heading as="h3" size="md" textAlign="center" m="0px 8px 40px 8px" color="#555555">Agora é só ficar de olho no seu e-mail e esperar a conexão 👀</Heading>
-                    <Profile profile={profile} />
+                    <Box d="flex" justifyContent="center">
+                        <Profile profile={profile} />
+                    </Box>
                     <Link href={`/dashboard/editProfile?userId=${router.query.userId}`}><Button colorScheme="telegram" d="flex" m="16px auto">Editar perfil</Button></Link>
                 </Box>
                 :
