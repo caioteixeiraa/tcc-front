@@ -82,7 +82,7 @@ export const Admin = () => {
             <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoradas(os)</Heading>
             {mentees.map((mentee) => {
               return (
-                <Box mt="32px" textAlign="center" id={mentee.userId}>
+                <Box mt="32px" textAlign="center" key={mentee.userId}>
                   <Profile mt="32px" profile={mentee}/>
                   <Button mt="16px" variant='outline' colorScheme="telegram" isActive={selectedMentee.userId === mentee.userId} onClick={() => setSelectedMentee(mentee)}>
                     {selectedMentee.userId === mentee.userId ? 'Selecionado' : 'Selecionar'}
@@ -95,7 +95,7 @@ export const Admin = () => {
             <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoras(es)</Heading>
             {mentors.map((mentor) => {
               return (
-                <Box mt="16px" textAlign="center" id={mentor.userId}>
+                <Box mt="16px" textAlign="center" key={mentor.userId}>
                   <Profile mt="32px" profile={mentor}/>
                   <Button mt="16px" variant='outline' colorScheme="telegram" isActive={selectedMentor.userId === mentor.userId} onClick={() => setSelectedMentor(mentor)}>
                     {selectedMentor.userId === mentor.userId ? 'Selecionado' : 'Selecionar'}
