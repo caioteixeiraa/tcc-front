@@ -6,7 +6,8 @@ import github from '../../assets/images/github.png'
 
 export const Profile = ({ profile }) => {
   return (
-    <Box textAlign="center">
+    <Box>
+      <Box maxWidth="340px" textAlign="center">
         <Heading as="h3" size="md">{profile.name}, {profile.age}</Heading>
         <Text color="#999999">{profile.state}, BR</Text>
         <Text color="#999999">{profile.email}</Text>
@@ -20,34 +21,37 @@ export const Profile = ({ profile }) => {
             </Link>
           </Box>
         </Box>
-        <Box border="2px solid #0088CB" borderRadius="12px" m="0 auto" p="1em 3em 1em 3em" w="400px" maxWidth="300px" alignSelf="center">
-          <Stack spacing={2}>
-            {profile.company && 
-              <Box d="flex" justifyContent="space-between">
-                <Text as="b" textAlign="left">Empresa</Text> 
-                <Text textAlign="right">{profile.company}</Text>
-              </Box>
-            }
-            {profile.marketTime &&
-              <Box d="flex" justifyContent="space-between">
-                  <Text as="b" textAlign="left">Tempo de mercado</Text> 
-                  <Text textAlign="right">{profile.marketTime}</Text>
-              </Box>
-            }
-            {profile.skills.length !== 0 &&
-              <Box d="flex" justifyContent="space-between">
-                  <Text as="b" textAlign="left">Competências</Text> 
-                  <Text textAlign="right">{profile.skills.join(', ')}</Text>
-              </Box>
-            }
-            {profile.interests.length !== 0 &&
-              <Box d="flex" justifyContent="space-between">
-                  <Text as="b" textAlign="left">Quer desenvolver</Text> 
-                  <Text textAlign="right">{profile.interests.join(', ')}</Text>
-              </Box>
-            }
-          </Stack>
+        <Box d="flex" justifyContent="center">
+          <Box border="2px solid #0088CB" borderRadius="12px" p="1em 3em 1em 3em" w="400px" maxWidth="300px" alignSelf="center">
+            <Stack spacing={2}>
+              {profile.company && 
+                <Box d="flex" justifyContent="space-between">
+                  <Text as="b" textAlign="left">Empresa</Text> 
+                  <Text textAlign="right">{profile.company}</Text>
+                </Box>
+              }
+              {profile.marketTime &&
+                <Box d="flex" justifyContent="space-between">
+                    <Text as="b" textAlign="left">Tempo de mercado</Text> 
+                    <Text textAlign="right">{profile.marketTime}</Text>
+                </Box>
+              }
+              {profile.skills.length !== 0 &&
+                <Box d="flex" justifyContent="space-between">
+                    <Text as="b" textAlign="left">Competências</Text> 
+                    <Text textAlign="right">{profile.skills.join(', ')}</Text>
+                </Box>
+              }
+              {profile.interests.length !== 0 &&
+                <Box d="flex" justifyContent="space-between">
+                    <Text as="b" textAlign="left">Quer desenvolver</Text> 
+                    <Text textAlign="right">{profile.interests.join(', ')}</Text>
+                </Box>
+              }
+            </Stack>
+          </Box>
         </Box>
+      </Box>
       </Box>
   )
 }
