@@ -13,14 +13,13 @@ import Profile from '../../components/Profile/Profile'
 
 export const Admin = () => {
     useProtectedPage()
-    const router = useRouter()
     const [mentees, setMentees] = useState([])
     const [mentors, setMentors] = useState([])
     const [selectedMentee, setSelectedMentee] = useState({})
     const [selectedMentor, setSelectedMentor] = useState({})
 
     const getMentees = () => {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentees/getAllMentees`, {
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentees/getAllMentees?userId=${localStorage.getItem("userId")}`, {
         headers: {
           authorization: localStorage.getItem("token")
         }
@@ -35,7 +34,7 @@ export const Admin = () => {
     }
 
     const getMentors = () => {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getAllMentors`, {
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getAllMentors?userId=${localStorage.getItem("userId")}`, {
         headers: {
           authorization: localStorage.getItem("token")
         }
@@ -59,7 +58,17 @@ export const Admin = () => {
     }
 
     const connect = () => {
-      console.log(mentee, mentor)
+      console.log(selectedMentee, selectedMentor)
+      const body = {
+        emailMentee: selectedMentee.email,
+        emailMentor: selectedMentor.email,
+      }
+
+      axios.post(`${process.env.NEXT_PUBLIC_API_URL}/connections/connect?userId=${localStorage.getItem('userId')}`, body, {
+        headers: {
+          authorization: localStorage.getItem("token")
+        }
+      })
     }
 
     return (
@@ -70,21 +79,27 @@ export const Admin = () => {
         </Box>
         <Box mt="32px" d="flex" justifyContent="space-evenly">
           <Box>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoradas(os)</Heading>
             {mentees.map((mentee) => {
               return (
-                <Box mt="32px" textAlign="center">
+                <Box mt="32px" textAlign="center" id={mentee.userId}>
                   <Profile mt="32px" profile={mentee}/>
-                  <Button mt="16px" onClick={() => setSelectedMentee(mentee)}>Selecionar</Button>
+                  <Button mt="16px" variant='outline' colorScheme="telegram" isActive={selectedMentee.userId === mentee.userId} onClick={() => setSelectedMentee(mentee)}>
+                    {selectedMentee.userId === mentee.userId ? 'Selecionado' : 'Selecionar'}
+                  </Button>
                 </Box>
               )
             })}
           </Box>
           <Box>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoras(es)</Heading>
             {mentors.map((mentor) => {
               return (
-                <Box mt="16px" textAlign="center">
+                <Box mt="16px" textAlign="center" id={mentor.userId}>
                   <Profile mt="32px" profile={mentor}/>
-                  <Button mt="16px" onClick={() => setSelectedMentor(mentor)}>Selecionar</Button>
+                  <Button mt="16px" variant='outline' colorScheme="telegram" isActive={selectedMentor.userId === mentor.userId} onClick={() => setSelectedMentor(mentor)}>
+                    {selectedMentor.userId === mentor.userId ? 'Selecionado' : 'Selecionar'}
+                  </Button>
                 </Box>
               )
             })}
