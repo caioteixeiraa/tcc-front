@@ -202,9 +202,9 @@ export const CreateProfile = () => {
 
     return (
         <Box>
-            <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
+            <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="space-between" alignItems="center">
                 <Heading as="h1" color="#FFFFFF" ml="32px" >Mentorada</Heading>
-                <Button colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button>
+                <Button variant='link' color='white' colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button>
             </Box>
 
             <Heading as="h2" size="lg" mt="32px" mx={isMobile ? '32px' : 'auto'} textAlign="center">Quer ser mentorado(a) ou quer mentorar alguém? 🤔</Heading>

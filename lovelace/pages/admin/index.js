@@ -73,9 +73,9 @@ export const Admin = () => {
 
     return (
       <>
-        <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
+        <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="space-between" alignItems="center">
           <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, cursive'>Mentorada</Heading>
-          <Link href='/'><Button colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
+          <Link href='/'><Button variant='link' color='white' colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
         </Box>
         <Box mt="32px" d="flex" justifyContent="space-evenly">
           <Box>

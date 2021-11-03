@@ -160,9 +160,9 @@ export const EditProfile = () => {
 
     return (
         <Box>
-            <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
+            <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="space-between" alignItems="center">
                 <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, cursive'>Mentorada</Heading>
-                <Link href='/'><Button colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button></Link>
+                <Link href='/'><Button variant='link' color='white' colorScheme='telegram' onClick={() => router.back()} mr="8px">Voltar</Button></Link>
             </Box>
             <Heading as="h2" size="2xl" textAlign="center" m="32px 16px" fontFamily='Bebas Neue, cursive'>Edição de perfil</Heading>
             {userType !== "" &&
