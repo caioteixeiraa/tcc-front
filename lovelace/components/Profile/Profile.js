@@ -8,7 +8,7 @@ export const Profile = ({ profile, profileType }) => {
   return (
     <Box>
       <Box maxWidth="340px" textAlign="center">
-        <Heading as='h2' size='xl' fontFamily='Bebas Neue, cursive' mb='8px' color='#2B7DE9'><u>{profileType}</u></Heading>
+        <Heading as='h2' size='xl' fontFamily='Bebas Neue, sans-serif' mb='8px' color='#2B7DE9'><u>{profileType}</u></Heading>
         <Heading as="h3" size="md">{profile.name}, {profile.age}</Heading>
         <Text color="#999999">{profile.state}, BR</Text>
         <Text color="#999999">{profile.email}</Text>
