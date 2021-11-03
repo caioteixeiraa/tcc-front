@@ -4,10 +4,11 @@ import { Text, Heading, Stack, Box, Link} from '@chakra-ui/react'
 import linkedin from '../../assets/images/linkedin.png'
 import github from '../../assets/images/github.png'
 
-export const Profile = ({ profile }) => {
+export const Profile = ({ profile, profileType }) => {
   return (
     <Box>
       <Box maxWidth="340px" textAlign="center">
+        <Heading as='h2' size='xl' fontFamily='Bebas Neue, sans-serif' mb='8px' color='#2B7DE9'><u>{profileType}</u></Heading>
         <Heading as="h3" size="md">{profile.name}, {profile.age}</Heading>
         <Text color="#999999">{profile.state}, BR</Text>
         <Text color="#999999">{profile.email}</Text>
@@ -22,7 +23,7 @@ export const Profile = ({ profile }) => {
           </Box>
         </Box>
         <Box d="flex" justifyContent="center">
-          <Box border="2px solid #0088CB" borderRadius="12px" p="1em 3em 1em 3em" w="400px" maxWidth="300px" alignSelf="center">
+          <Box border="2px solid #2B7DE9" borderRadius="12px" p="1em 3em 1em 3em" w="400px" maxWidth="300px" alignSelf="center">
             <Stack spacing={2}>
               {profile.company && 
                 <Box d="flex" justifyContent="space-between">

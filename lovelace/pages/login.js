@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
     Box,
-    Flex, 
     Heading, 
     Input, 
     Stack, 
@@ -102,7 +101,7 @@ export const Login = () => {
                 <Box w={isMobile ? '100vw' : '40%'} h='100vh' d='flex' alignItems='center' justifyContent='center'>
                     <Stack spacing={4} w='400px'>
                         <Stack spacing={2}>
-                            <Heading>Entre no Mentorada!</Heading>
+                            <Heading size='2xl' fontFamily='Bebas Neue, sans-serif'>Entrar no Mentorada</Heading>
                             <Text>Faça login com seu e-mail e senha.</Text>
                         </Stack>
                     <Stack>
@@ -144,12 +143,12 @@ export const Login = () => {
                 </Box>
                 </Box> :
             <>
-                <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="center" alignItems="center">
-                    <Heading as="h1" color="#FFFFFF" >Mentorada</Heading>
+                <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                    <Heading as="h1" size='2xl' color="#FFFFFF" fontFamily='Bebas Neue, sans-serif'>Mentorada</Heading>
                 </Box>
                     <Stack mt="32px" spacing={4} textAlign="center">
                         <Stack spacing={2}>
-                            <Heading>Entre no Mentorada!</Heading>
+                            <Heading size='2xl' fontFamily='Bebas Neue, sans-serif'>Entrar no Mentorada</Heading>
                             <Text>Faça login com seu e-mail e senha.</Text>
                         </Stack>
                         <Stack mx="16px">

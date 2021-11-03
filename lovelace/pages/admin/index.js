@@ -4,10 +4,8 @@ import { Button} from '@chakra-ui/button'
 import { 
     Heading, 
     Box, 
-    Text
 } from '@chakra-ui/react'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
-import { useRouter } from 'next/router'
 import axios from 'axios'
 import Profile from '../../components/Profile/Profile'
 
@@ -73,13 +71,13 @@ export const Admin = () => {
 
     return (
       <>
-        <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
-          <Heading as="h1" color="#FFFFFF" ml="32px">Mentorada</Heading>
-          <Link href='/'><Button colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
+        <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="space-between" alignItems="center">
+          <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, sans-serif'>Mentorada</Heading>
+          <Link href='/'><Button variant='link' color='white' colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
         </Box>
         <Box mt="32px" d="flex" justifyContent="space-evenly">
           <Box>
-            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoradas(os)</Heading>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px" fontFamily='Bebas Neue, sans-serif'>Mentoradas(os)</Heading>
             {mentees.map((mentee) => {
               return (
                 <Box mt="32px" textAlign="center" key={mentee.userId}>
@@ -92,7 +90,7 @@ export const Admin = () => {
             })}
           </Box>
           <Box>
-            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoras(es)</Heading>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px" fontFamily='Bebas Neue, sans-serif'>Mentoras(es)</Heading>
             {mentors.map((mentor) => {
               return (
                 <Box mt="16px" textAlign="center" key={mentor.userId}>
