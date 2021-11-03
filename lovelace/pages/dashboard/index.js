@@ -18,6 +18,7 @@ export const Dashboard = () => {
     const [profile, setProfile] = useState({})
     const [hasProfile, setHasProfile] = useState(false)
     const [loading, setLoading] =  useState(true)
+    const [profileType, setProfileType] = useState('')
 
     const checkIfHasProfile = async () => {
         axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getMentorById?userId=${router.query.userId}`, {
@@ -29,6 +30,7 @@ export const Dashboard = () => {
             if (res.data.length === 1) {
                 setProfile(res.data[0])
                 setHasProfile(true)
+                setProfileType('Mentor(a)')
                 setLoading(false)
             }
         })
@@ -42,6 +44,7 @@ export const Dashboard = () => {
                     if (res.data[0]) {
                     setProfile(res.data[0])
                     setHasProfile(true)
+                    setProfileType('Mentorada(o)')
                     setLoading(false)
                 } else {
                     setHasProfile(false)
@@ -79,7 +82,7 @@ export const Dashboard = () => {
                             <Heading as="h2" size="3xl" textAlign="center" m="24px 8px" fontFamily='Bebas Neue, cursive'>Seu perfil está completo! 🎉</Heading>
                             <Heading as="h3" size="md" textAlign="center" m="0px 8px 40px 8px" color="#555555">Agora é só ficar de olho no seu e-mail e esperar a conexão 👀</Heading>
                             <Box d="flex" justifyContent="center">
-                                <Profile profile={profile} />
+                                <Profile profile={profile} profileType={profileType} />
                             </Box>
                             <Link href={`/dashboard/editProfile?userId=${router.query.userId}`}><Button colorScheme="telegram" d="flex" m="16px auto">Editar perfil</Button></Link>
                         </Box>

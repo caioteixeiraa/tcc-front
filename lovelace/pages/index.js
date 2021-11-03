@@ -34,7 +34,7 @@ export default function Home() {
             </Stack>
             <ButtonGroup d="flex" justifyContent="center">
               <Link href='/login'>
-                <Button colorScheme='telegram' variant='outline'>Fazer Login</Button>
+                <Button colorScheme='telegram' variant='outline' >Fazer Login</Button>
               </Link>
               <Link href='/register'>
                 <Button colorScheme='telegram'>Cadastre-se</Button>
@@ -45,14 +45,17 @@ export default function Home() {
               <Heading as="h2" size="2xl" m="24px" color='white' fontFamily='Bebas Neue, cursive' textAlign='center'>Como funciona:</Heading>
               <Box d='flex' flexDir='column' justifyContent='center' alignItems='center' textAlign='center'>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px'>
+                  <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>1</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Cadastre-se</Text>
                   <Text>Você cria um <b>cadastro na plataforma</b>. Essa etapa é simples, basta um e-mail e senha e mandaremos um <b>código de confirmação</b> para seu e-mail.</Text>
                 </Box>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px' mt='16px'>
+                  <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>2</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Crie um perfil</Text>
                   <Text>Agora é a hora de criar um <b>perfil com suas competências</b> para ser conectada(o). Você pode escolher entre mentorar ou ser mentorada(o) por uma pessoa :D</Text>
                 </Box>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px' mt='16px'>
+                  <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>3</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Pronto!</Text>
                   <Text>Depois de criado o perfil, você pode editá-lo quantas vezes quiser e <b>esperar receber um e-mail com a pessoa que foi conectada com você!</b></Text>
                 </Box>
@@ -74,10 +77,10 @@ export default function Home() {
               </Stack>
               <ButtonGroup onGroup d='block' m='0 auto 48px'>
                 <Link href='/login'>
-                  <Button colorScheme='telegram' variant='outline'>Entrar</Button>
+                  <Button colorScheme='telegram' variant='outline' size='lg'>Entrar</Button>
                 </Link>
                 <Link href='/register'>
-                  <Button colorScheme='telegram'>Cadastre-se</Button>
+                  <Button colorScheme='telegram' size='lg'>Cadastre-se</Button>
                 </Link>
               </ButtonGroup>
             </Stack>
@@ -85,14 +88,17 @@ export default function Home() {
               <Heading as="h2" size="2xl" m="24px" color='white' fontFamily='Bebas Neue, cursive'>Como funciona:</Heading>
               <Box d='flex' flexDir='row' mx='4%' my="16px" justifyContent='space-evenly'>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px'>
+                  <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>1</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Cadastre-se</Text>
                   <Text>Você cria um <b>cadastro na plataforma</b>. Essa etapa é simples, basta um e-mail e senha e mandaremos um <b>código de confirmação</b> para seu e-mail.</Text>
                 </Box>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px'>
+                  <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>2</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Crie um perfil</Text>
                   <Text>Agora é a hora de criar um <b>perfil com suas competências</b> para ser conectada(o). Você pode escolher entre mentorar ou ser mentorada(o) por uma pessoa :D</Text>
                 </Box>
                 <Box maxW='300px' bg='white' border='2px solid #000000' p='24px' borderRadius='8px'>
+                <Text fontSize='6xl' fontFamily='Bebas Neue, cursive'>3</Text>
                   <Text fontSize='2xl' as='u' fontFamily='Bebas Neue, cursive'>Pronto!</Text>
                   <Text>Depois de criado o perfil, você pode editá-lo quantas vezes quiser e <b>esperar receber um e-mail com a pessoa que foi conectada com você!</b></Text>
                 </Box>
