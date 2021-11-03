@@ -60,12 +60,12 @@ export const Dashboard = () => {
     return (
         <Box>
             <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
-                <Heading as="h1" color="#FFFFFF" ml="32px" >Mentorada</Heading>
+                <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, cursive'>Mentorada</Heading>
                 <Link href='/'><Button colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
             </Box>
             {hasProfile ? 
                 <Box>
-                    <Heading as="h2" size="lg" textAlign="center" m="24px 8px">Seu perfil está completo! 🎉</Heading>
+                    <Heading as="h2" size="3xl" textAlign="center" m="24px 8px" fontFamily='Bebas Neue, cursive'>Seu perfil está completo! 🎉</Heading>
                     <Heading as="h3" size="md" textAlign="center" m="0px 8px 40px 8px" color="#555555">Agora é só ficar de olho no seu e-mail e esperar a conexão 👀</Heading>
                     <Box d="flex" justifyContent="center">
                         <Profile profile={profile} />

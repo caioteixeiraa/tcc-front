@@ -74,12 +74,12 @@ export const Admin = () => {
     return (
       <>
         <Box d='flex' backgroundColor="#0088CC" h="60px" justifyContent="space-between" alignItems="center">
-          <Heading as="h1" color="#FFFFFF" ml="32px">Mentorada</Heading>
+          <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, cursive'>Mentorada</Heading>
           <Link href='/'><Button colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
         </Box>
         <Box mt="32px" d="flex" justifyContent="space-evenly">
           <Box>
-            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoradas(os)</Heading>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px" fontFamily='Bebas Neue, cursive'>Mentoradas(os)</Heading>
             {mentees.map((mentee) => {
               return (
                 <Box mt="32px" textAlign="center" key={mentee.userId}>
@@ -92,7 +92,7 @@ export const Admin = () => {
             })}
           </Box>
           <Box>
-            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px">Mentoras(es)</Heading>
+            <Heading as="h2" size="lg" d="flex" justifyContent="center" alignItems="center" backgroundColor="#0088CC" color="#FFFFFF" height="48px" fontFamily='Bebas Neue, cursive'>Mentoras(es)</Heading>
             {mentors.map((mentor) => {
               return (
                 <Box mt="16px" textAlign="center" key={mentor.userId}>

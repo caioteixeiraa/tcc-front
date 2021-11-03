@@ -104,7 +104,7 @@ export const Register = () => {
                 </Box>
                 <Box w='60%' h='100vh' d='flex' alignItems='center' justifyContent='center'>
                     <Stack spacing={4} w='400px'>
-                        <Heading>Cadastro</Heading>
+                        <Heading fontFamily='Bebas Neue, cursive'>Cadastro</Heading>
                         <Stack>
                             <Box>
                                 <Input
@@ -151,11 +151,11 @@ export const Register = () => {
                 </Box> 
             </Box> :
             <>
-                <Heading as="h1" color="#FFFFFF" backgroundColor="#0088CC" h="60px" d="flex" justifyContent="center"alignItems="center">Mentorada</Heading>
+                <Heading as="h1" color="#FFFFFF" backgroundColor="#2B7DE9" h="60px" d="flex" justifyContent="center"alignItems="center" fontFamily='Bebas Neue, cursive'>Mentorada</Heading>
                 <Box d='flex' alignItems='center' justifyContent='center' textAlign="center" mt="32px">
                     <Stack spacing={4}>
                         <Stack spacing={2} mx="16px">
-                            <Heading>Cadastro</Heading>
+                            <Heading fontFamily='Bebas Neue, cursive'>Cadastro</Heading>
                             <Text>Bastam um e-mail e senha e você receberá um código por e-mail para confirmar o cadastro.</Text>
                         </Stack>
                         <Stack>
