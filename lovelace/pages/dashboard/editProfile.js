@@ -9,10 +9,7 @@ import {
   Input, 
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText, 
   Select,
-  Text
 } from '@chakra-ui/react'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useRouter } from 'next/router'

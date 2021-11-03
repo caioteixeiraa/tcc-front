@@ -1,4 +1,3 @@
-import WelcomeCard from '../components/WelcomeCard'
 import { Box, Text, Stack, Link, Heading } from '@chakra-ui/react'
 import { ButtonGroup, Button } from '@chakra-ui/button'
 import Image from 'next/image'

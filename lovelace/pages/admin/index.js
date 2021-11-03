@@ -4,10 +4,8 @@ import { Button} from '@chakra-ui/button'
 import { 
     Heading, 
     Box, 
-    Text
 } from '@chakra-ui/react'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
-import { useRouter } from 'next/router'
 import axios from 'axios'
 import Profile from '../../components/Profile/Profile'
 
