@@ -3,14 +3,24 @@ import Link from 'next/link'
 import { Button} from '@chakra-ui/button'
 import { 
     Heading, 
-    Box, 
-    Text
+    Box,
+    Stack,
+    Text,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
+    ButtonGroup, 
 } from '@chakra-ui/react'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Profile from '../../components/Profile/Profile'
 import ReactLoading from 'react-loading'
+import { translateProfile } from '../../helpers/translate'
 
 export const Dashboard = () => {
     useProtectedPage()
@@ -19,6 +29,7 @@ export const Dashboard = () => {
     const [hasProfile, setHasProfile] = useState(false)
     const [loading, setLoading] =  useState(true)
     const [profileType, setProfileType] = useState('')
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const checkIfHasProfile = async () => {
         axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getMentorById?userId=${router.query.userId}`, {
@@ -30,7 +41,7 @@ export const Dashboard = () => {
             if (res.data.length === 1) {
                 setProfile(res.data[0])
                 setHasProfile(true)
-                setProfileType('Mentor(a)')
+                setProfileType('mentor')
                 setLoading(false)
             }
         })
@@ -44,7 +55,7 @@ export const Dashboard = () => {
                     if (res.data[0]) {
                     setProfile(res.data[0])
                     setHasProfile(true)
-                    setProfileType('Mentorada(o)')
+                    setProfileType('mentee')
                     setLoading(false)
                 } else {
                     setHasProfile(false)
@@ -54,6 +65,24 @@ export const Dashboard = () => {
             .catch((err) => {
                 console.log(err)
             })
+        })
+    }
+
+    const deleteProfile = () => {
+        axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/${profileType}s/delete?userId=${localStorage.getItem('userId')}`, {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            setHasProfile(false)
+            setProfile({})
+            setProfileType('')
+            onClose()
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
         })
     }
 
@@ -82,9 +111,10 @@ export const Dashboard = () => {
                             <Heading as="h2" size="3xl" textAlign="center" m="24px 8px" fontFamily='Bebas Neue, sans-serif'>Seu perfil está completo! 🎉</Heading>
                             <Heading as="h3" size="md" textAlign="center" m="0px 8px 40px 8px" color="#555555">Agora é só ficar de olho no seu e-mail e esperar a conexão 👀</Heading>
                             <Box d="flex" justifyContent="center">
-                                <Profile profile={profile} profileType={profileType} />
+                                <Profile profile={profile} profileType={translateProfile(profileType)} />
                             </Box>
                             <Link href={`/dashboard/editProfile?userId=${router.query.userId}`}><Button colorScheme="telegram" d="flex" m="16px auto">Editar perfil</Button></Link>
+                            <Button colorScheme='red' variant='outline' d='block' m='0 auto' onClick={onOpen}>Deletar perfil</Button>
                         </Box>
                         :
                         <Box>
@@ -95,6 +125,23 @@ export const Dashboard = () => {
                     }
                 </>
             }
+            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} mx="16px">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Deletar perfil</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody pb={6}>
+                        <Stack spacing={4}>
+                            <Text as='b'>Tem certeza que deseja deletar seu perfil?</Text>
+                            <Text>Lembrando que você <b>continuará tendo seu cadastro</b>, mas não terá um perfil para ser conectado.</Text>
+                            <ButtonGroup d='flex' justifyContent='center'>
+                                <Button colorScheme='telegram' variant='outline' onClick={onClose}>Cancelar</Button>
+                                <Button colorScheme='red' onClick={deleteProfile}>Deletar meu perfil</Button>
+                            </ButtonGroup>
+                        </Stack>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </Box>
     )
 }

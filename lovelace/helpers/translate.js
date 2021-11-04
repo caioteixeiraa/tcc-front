@@ -14,3 +14,12 @@ const translatedFields = {
 export const translate = (field) => {
   return translatedFields[field]
 }
+
+const translatedProfiles = {
+  "mentor": "Mentor(a)",
+  "mentee": "Mentorada(o)"
+}
+
+export const translateProfile = (field) => {
+  return translatedProfiles[field]
+}
