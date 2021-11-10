@@ -122,6 +122,16 @@ export const CreateProfile = () => {
             helperText: "Aqui você coloca o que deseja desenvolver na sua carreira",
             users: ["mentee", "mentor"]
         },
+        {   
+            label: "Quantas conexões você quer receber?",
+            name: "numberOfConnections",
+            placeholder: "Ex: 2",
+            type: "number",
+            required: true,
+            inputType: "text",
+            helperText: "Apenas números",
+            users: ["mentor"]
+        },
     ]
 
     const initialForm = {}
