@@ -212,7 +212,8 @@ export const Login = () => {
                                     onChange={setEmail} 
                                 />
                                 <Button 
-                                    colorScheme='telegram' 
+                                    colorScheme='telegram'
+                                    isDisabled={!enableInputs}
                                     onClick={() => {
                                         forgotPassword(),
                                         setEnableInputs(false)
@@ -220,6 +221,7 @@ export const Login = () => {
                                     Enviar
                                 </Button>
                             </HStack>
+                            {!enableInputs && <Text as='b'>Um e-mail com o código foi enviado! Cheque seu e-mail.</Text>}
                             <Input 
                                 placeholder="Código de confirmação" 
                                 maxLength={6}

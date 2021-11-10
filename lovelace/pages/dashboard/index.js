@@ -52,7 +52,7 @@ export const Dashboard = () => {
                 }
             })
             .then((res) => {
-                    if (res.data[0]) {
+                if (res.data.length === 1) {
                     setProfile(res.data[0])
                     setHasProfile(true)
                     setProfileType('mentee')
@@ -64,6 +64,7 @@ export const Dashboard = () => {
             })
             .catch((err) => {
                 console.log(err)
+                setLoading(false)
             })
         })
     }
@@ -95,14 +96,19 @@ export const Dashboard = () => {
     }
 
     return (
-        <Box>
+        <Box height="100vh" position="relative">
             <Box d='flex' backgroundColor="#2B7DE9" h="60px" justifyContent="space-between" alignItems="center">
                 <Heading as="h1" color="#FFFFFF" ml="32px" fontFamily='Bebas Neue, sans-serif'>Mentorada</Heading>
                 <Link href='/'><Button variant='link' color='white' colorScheme='telegram' onClick={logout} mr="8px">Sair</Button></Link>
             </Box>
             {loading ?
-                <Box d='flex' justifyContent='center' alignItems='center' mt='64px'>
-                    <ReactLoading type='spin' color='#2B7DE9' height='72px' width='72px' />
+                <Box d='flex' justifyContent='center' alignItems='center'>
+                    <Box position="absolute" bottom="50%">
+                        <ReactLoading type='spin' color='#2B7DE9' height='72px' width='72px' />
+                    </Box>    
+                    <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                        <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
+                    </Box>
                 </Box>
             :
                 <>
@@ -115,15 +121,22 @@ export const Dashboard = () => {
                             </Box>
                             <Link href={`/dashboard/editProfile?userId=${router.query.userId}`}><Button colorScheme="telegram" d="flex" m="16px auto">Editar perfil</Button></Link>
                             <Button colorScheme='red' variant='outline' d='block' m='0 auto' onClick={onOpen}>Deletar perfil</Button>
+                            <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                                <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
+                            </Box>
                         </Box>
                         :
                         <Box>
                             <Heading as="h2" size="2xl" textAlign="center" m="40px 8px 16px 8px">Quase lá! Crie seu perfil para se conectar!</Heading>
                             <Text textAlign="center" maxW="350px" mx="auto" mb="32px">Precisamos de algumas informações sobre você para garantirmos a melhor conexão.</Text>
                             <Link href='/dashboard/createProfile'><Button size="lg" colorScheme="telegram" d="flex" m="8px auto" maxW="300px" isFullWidth>Criar perfil</Button></Link>
+                            <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                                <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
+                            </Box>
                         </Box> 
                     }
                 </>
+                
             }
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} mx="16px">
                 <ModalOverlay />
