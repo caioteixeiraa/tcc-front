@@ -21,6 +21,7 @@ import axios from 'axios'
 import Profile from '../../components/Profile/Profile'
 import ReactLoading from 'react-loading'
 import { translateProfile } from '../../helpers/translate'
+import { useWindowProperties } from '../../helpers/useWindowProperties'
 
 export const Dashboard = () => {
     useProtectedPage()
@@ -30,6 +31,7 @@ export const Dashboard = () => {
     const [loading, setLoading] =  useState(true)
     const [profileType, setProfileType] = useState('')
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isMobile } = useWindowProperties()
 
     const checkIfHasProfile = async () => {
         axios.get(`${process.env.NEXT_PUBLIC_API_URL}/mentors/getMentorById?userId=${router.query.userId}`, {
@@ -106,14 +108,14 @@ export const Dashboard = () => {
                     <Box position="absolute" bottom="50%">
                         <ReactLoading type='spin' color='#2B7DE9' height='72px' width='72px' />
                     </Box>    
-                    <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                    <Box d='flex' position={`${isMobile ? 'inherit' : 'absolute'}`} bottom={`${isMobile ? '0' : ''}`} width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
                         <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
                     </Box>
                 </Box>
             :
                 <>
                     {hasProfile ? 
-                        <Box>
+                        <Box position="relative">
                             <Heading as="h2" size="3xl" textAlign="center" m="24px 8px" fontFamily='Bebas Neue, sans-serif'>Seu perfil está completo! 🎉</Heading>
                             <Heading as="h3" size="md" textAlign="center" m="0px 8px 40px 8px" color="#555555">Agora é só ficar de olho no seu e-mail e esperar a conexão 👀</Heading>
                             <Box d="flex" justifyContent="center">
@@ -121,7 +123,7 @@ export const Dashboard = () => {
                             </Box>
                             <Link href={`/dashboard/editProfile?userId=${router.query.userId}`}><Button colorScheme="telegram" d="flex" m="16px auto">Editar perfil</Button></Link>
                             <Button colorScheme='red' variant='outline' d='block' m='0 auto' onClick={onOpen}>Deletar perfil</Button>
-                            <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                            <Box d='flex' mt='40px' position={`${isMobile ? 'inherit' : 'absolute'}`} bottom={`${isMobile ? '0' : ''}`} width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
                                 <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
                             </Box>
                         </Box>
@@ -130,7 +132,7 @@ export const Dashboard = () => {
                             <Heading as="h2" size="2xl" textAlign="center" m="40px 8px 16px 8px">Quase lá! Crie seu perfil para se conectar!</Heading>
                             <Text textAlign="center" maxW="350px" mx="auto" mb="32px">Precisamos de algumas informações sobre você para garantirmos a melhor conexão.</Text>
                             <Link href='/dashboard/createProfile'><Button size="lg" colorScheme="telegram" d="flex" m="8px auto" maxW="300px" isFullWidth>Criar perfil</Button></Link>
-                            <Box d='flex' position="absolute" bottom="0" width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
+                            <Box d='flex' position={`${isMobile ? 'inherit' : 'absolute'}`} bottom={`${isMobile ? '0' : ''}`} width="100vw" backgroundColor="#2B7DE9" h="60px" justifyContent="center" alignItems="center">
                                 <Heading as="h1" size='sm' color="#FFFFFF">feito com ❤️ por caio teixeira</Heading>
                             </Box>
                         </Box> 
