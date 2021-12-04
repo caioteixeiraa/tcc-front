@@ -49,6 +49,12 @@ export const Profile = ({ profile, profileType }) => {
                     <Text textAlign="right">{profile.interests.join(', ')}</Text>
                 </Box>
               }
+              {profile.numberOfConnections >= 0 &&
+                <Box d="flex" justifyContent="space-between">
+                    <Text as="b" textAlign="left">Nº de conexões disponíveis</Text> 
+                    <Text textAlign="right">{profile.numberOfConnections}</Text>
+                </Box>
+              }
             </Stack>
           </Box>
         </Box>

@@ -37,6 +37,7 @@ export const EditProfile = () => {
   const [skill, setSkill] = useState("")
   const [interest, setInterest] = useState("")
   const [interests, setInterests] = useState([])
+  const [numberOfConnections, setNumberOfConnections] = useState([])
   const { isMobile } = useWindowProperties()
     
     const checkIfHasProfile = async () => {
@@ -88,6 +89,7 @@ export const EditProfile = () => {
       setGithub(profile.github)
       setSkills(profile.skills)
       setInterests(profile.interests)
+      setNumberOfConnections(profile.numberOfConnections)
     }, [profile])
 
     const addInput = (inputName, value) => {
@@ -136,6 +138,7 @@ export const EditProfile = () => {
       if (userType === "mentor") {
         body.marketTime = marketTime
         body.company = company
+        body.numberOfConnections = numberOfConnections
       }
       
       axios.put(`${process.env.NEXT_PUBLIC_API_URL}/${userType}s/update?userId=${router.query.userId}`, body, {
@@ -307,6 +310,16 @@ export const EditProfile = () => {
                               )
                           })}
                         </Box>
+                      </FormControl>
+                      <FormControl isRequired={true}>
+                        <FormLabel>Número de conexões</FormLabel>
+                          <Input 
+                            name={"numberOfConnections"}
+                            value={numberOfConnections} 
+                            onChange={(e) => setNumberOfConnections(e.target.value)} 
+                            placeholder={"Quantas pessoas deseja mentorar?"}
+                            type="text"
+                          />
                       </FormControl>
                       <Button isFullWidth type="submit" colorScheme="telegram" mt="32px" mb="40px">Finalizar edição</Button>
                       <Box></Box>
