@@ -39,6 +39,7 @@ export const Login = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useInput('')
     const [emailToken, setEmailToken] = useInput('')
     const [enableInputs, setEnableInputs] = useState(true)
+    const [loginError, setLoginError] = useState(false)
 
     const { isMobile } = useWindowProperties()
 
@@ -56,8 +57,10 @@ export const Login = () => {
                 pathname: '/dashboard',
                 query:{ userId: res.data.id }
             })
+            setLoginError(false)
         })
         .catch((err) => {
+            setLoginError(true)
             console.log(err)
         })
     }
@@ -137,8 +140,10 @@ export const Login = () => {
                             colorScheme='telegram' 
                             variant='link' 
                             onClick={onOpen}
-                            >Esqueci minha senha</Button>
-                        </ButtonGroup>
+                            >Esqueci minha senha
+                        </Button>
+                    </ButtonGroup>
+                    {loginError && <Text color="crimson" as='i'>Seu e-mail ou senha estão incorretos. Tente novamente.</Text>}
                     </Stack>
                 </Box>
                 </Box> :
@@ -189,7 +194,9 @@ export const Login = () => {
                             colorScheme='telegram' 
                             variant='link' 
                             onClick={onOpen}
-                            >Esqueci minha senha</Button>
+                            >Esqueci minha senha
+                        </Button>
+                    {loginError && <Text color="crimson" as='i'>Seu e-mail ou senha estão incorretos. Tente novamente.</Text>}
                     </Stack>
             </>
             }
