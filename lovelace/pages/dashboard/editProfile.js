@@ -311,16 +311,18 @@ export const EditProfile = () => {
                           })}
                         </Box>
                       </FormControl>
-                      <FormControl isRequired={true}>
-                        <FormLabel>Número de conexões</FormLabel>
-                          <Input 
-                            name={"numberOfConnections"}
-                            value={numberOfConnections} 
-                            onChange={(e) => setNumberOfConnections(e.target.value)} 
-                            placeholder={"Quantas pessoas deseja mentorar?"}
-                            type="text"
-                          />
-                      </FormControl>
+                      {userType === "mentor" && 
+                        <FormControl isRequired={true}>
+                          <FormLabel>Número de conexões</FormLabel>
+                            <Input 
+                              name={"numberOfConnections"}
+                              value={numberOfConnections} 
+                              onChange={(e) => setNumberOfConnections(e.target.value)} 
+                              placeholder={"Quantas pessoas deseja mentorar?"}
+                              type="text"
+                            />
+                        </FormControl>
+                      }
                       <Button isFullWidth type="submit" colorScheme="telegram" mt="32px" mb="40px">Finalizar edição</Button>
                       <Box></Box>
                     </Stack>
